@@ -217,12 +217,21 @@ func (dia *Diagram) Draw(canvas diagram.Canvas) {
 		tox := dia.Lane(message.To).Center
 		toy := y0 + (message.End()-dia.Start)*dia.Theme.TimeScale
 
-		sends.Poly(diagram.Ps(fromx, fromy, tox, toy), message.Line.Or(dia.Theme.Send))
+		lineStyle := message.Line.Or(dia.Theme.Send)
+		sends.Poly(diagram.Ps(fromx, fromy, tox, toy), lineStyle)
+
+		dx, dy := tox-fromx, toy-fromy
+		angle := math.Atan2(dy, dx)
+
+		var s = lineStyle.Size * 4
+		var sn, cs float64
+		sn, cs = math.Sincos(angle - math.Pi + math.Pi/8)
+		sends.Poly(diagram.Ps(tox, toy, tox+cs*s, toy+sn*s), lineStyle)
+		sn, cs = math.Sincos(angle - math.Pi - math.Pi/8)
+		sends.Poly(diagram.Ps(tox, toy, tox+cs*s, toy+sn*s), lineStyle)
 
 		if message.Text != "" {
 			textstyle := message.Caption.Or(dia.Theme.Message)
-			dx, dy := tox-fromx, toy-fromy
-			angle := math.Atan2(dy, dx)
 
 			if dx < 0 {
 				// right-to-left
