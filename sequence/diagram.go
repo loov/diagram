@@ -36,8 +36,8 @@ func New() *Diagram {
 
 	dia.Start, dia.End = Automatic, Automatic
 
-	dia.AutoSleep = 1.0
-	dia.AutoDelay = 1.0
+	dia.AutoSleep = 0.5
+	dia.AutoDelay = 0.5
 
 	const fontSize = 12
 	const lineHeight = 16
@@ -92,6 +92,7 @@ type Message struct {
 	Text string
 
 	When  Time
+	Sleep Time
 	Delay Time
 
 	Caption diagram.Style
@@ -104,6 +105,7 @@ func FromTo(from, to Role, message string) *Message {
 		To:    to,
 		Text:  message,
 		When:  Automatic,
+		Sleep: Automatic,
 		Delay: Automatic,
 	}
 }
@@ -112,6 +114,7 @@ func (message *Message) Start() Time { return message.When }
 func (message *Message) End() Time   { return message.When + message.Delay }
 
 func (message *Message) At(at Time) *Message           { message.When = at; return message }
+func (message *Message) WithSleep(sleep Time) *Message { message.Sleep = sleep; return message }
 func (message *Message) WithDelay(delay Time) *Message { message.Delay = delay; return message }
 
 func (dia *Diagram) Add(messages ...*Message) {
@@ -145,7 +148,11 @@ func (dia *Diagram) normalizeTimes() {
 	last := &Message{}
 	for _, message := range dia.Messages {
 		if IsAutomatic(message.When) {
-			message.When = last.End() + dia.AutoSleep
+			if !IsAutomatic(message.Sleep) {
+				message.When = last.End() + message.Sleep
+			} else {
+				message.When = last.End() + dia.AutoSleep
+			}
 		}
 		if IsAutomatic(message.Delay) {
 			message.Delay = dia.AutoDelay

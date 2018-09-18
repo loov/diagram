@@ -10,12 +10,16 @@ import (
 
 func main() {
 	seq := sequence.New()
+	seq.AutoSleep = 0.5
+	seq.AutoDelay = 0.5
 	seq.Add(
 		sequence.FromTo("Client", "Server", "Init"),
+		sequence.FromTo("Server", "DNS", "Update"),
+		sequence.FromTo("DNS", "Server", "ACK"),
 		sequence.FromTo("Server", "Client", "Data"),
-		sequence.FromTo("Client", "Server", "Update").WithDelay(3),
-		sequence.FromTo("Client", "Server", "Update").WithDelay(2),
-		sequence.FromTo("Client", "Server", "Update").WithDelay(1),
+		sequence.FromTo("Client", "Server", "Update").WithSleep(1).WithDelay(3),
+		sequence.FromTo("Client", "Server", "Update").WithSleep(-0.5).WithDelay(1),
+		sequence.FromTo("Client", "Server", "Update").WithSleep(-0.5).WithDelay(2),
 	)
 
 	svg := diagram.NewSVG(seq.Size())
