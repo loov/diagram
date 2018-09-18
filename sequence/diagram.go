@@ -64,7 +64,7 @@ func New() *Diagram {
 	}
 	dia.Theme.Send = diagram.Style{
 		Stroke: color.NRGBA{0, 0, 0, 255},
-		Size:   2,
+		Size:   1.3,
 		// TODO: arrow
 	}
 
