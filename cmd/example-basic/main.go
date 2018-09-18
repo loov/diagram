@@ -13,13 +13,13 @@ func main() {
 	seq.AutoSleep = 0.5
 	seq.AutoDelay = 0.5
 	seq.Add(
-		sequence.FromTo("Client", "Server", "Init"),
-		sequence.FromTo("Server", "DNS", "Update"),
-		sequence.FromTo("DNS", "Server", "ACK"),
-		sequence.FromTo("Server", "Client", "Data"),
-		sequence.FromTo("Client", "Server", "Update").WithSleep(1).WithDelay(3),
-		sequence.FromTo("Client", "Server", "Update").WithSleep(-0.5).WithDelay(1),
-		sequence.FromTo("Client", "Server", "Update").WithSleep(-0.5).WithDelay(2),
+		sequence.Send("Client", "Server", "Init"),
+		sequence.Send("Server", "DNS", "Update"),
+		sequence.Send("DNS", "Server", "ACK"),
+		sequence.Send("Server", "Client", "Data"),
+		sequence.Send("Client", "Server", "Update").Sleeping(1).Delayed(3),
+		sequence.Send("Client", "Server", "Update").Sleeping(-0.5).Delayed(1),
+		sequence.Send("Client", "Server", "Update").Sleeping(-0.5).Delayed(2),
 	)
 
 	svg := diagram.NewSVG(seq.Size())

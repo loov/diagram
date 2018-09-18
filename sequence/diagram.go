@@ -97,9 +97,11 @@ type Message struct {
 
 	Caption diagram.Style
 	Line    diagram.Style
+
+	align int
 }
 
-func FromTo(from, to Role, message string) *Message {
+func Send(from, to Role, message string) *Message {
 	return &Message{
 		From:  from,
 		To:    to,
@@ -113,9 +115,13 @@ func FromTo(from, to Role, message string) *Message {
 func (message *Message) Start() Time { return message.When }
 func (message *Message) End() Time   { return message.When + message.Delay }
 
-func (message *Message) At(at Time) *Message           { message.When = at; return message }
-func (message *Message) WithSleep(sleep Time) *Message { message.Sleep = sleep; return message }
-func (message *Message) WithDelay(delay Time) *Message { message.Delay = delay; return message }
+func (message *Message) At(at Time) *Message                { message.When = at; return message }
+func (message *Message) Sleeping(sleep Time) *Message       { message.Sleep = sleep; return message }
+func (message *Message) Delayed(delay Time) *Message        { message.Delay = delay; return message }
+func (message *Message) Lined(style diagram.Style) *Message { message.Line = style; return message }
+
+func (message *Message) StartAlign() *Message { message.align = -1; return message }
+func (message *Message) EndAlign() *Message   { message.align = 1; return message }
 
 func (dia *Diagram) Add(messages ...*Message) {
 	dia.Messages = append(dia.Messages, messages...)
@@ -238,9 +244,30 @@ func (dia *Diagram) Draw(canvas diagram.Canvas) {
 				angle = math.Atan2(-dy, -dx)
 			}
 
+			var tx, ty float64
+			if message.align == 0 {
+				tx = fromx + dx*0.5
+				ty = fromy + dy*0.5
+			} else if message.align == -1 {
+				tx = fromx + dx*0.1
+				ty = fromy + dy*0.1
+				if fromx < tox {
+					textstyle.Origin.X = -1
+				} else {
+					textstyle.Origin.X = 1
+				}
+			} else if message.align == 1 {
+				tx = fromx + dx*0.9
+				ty = fromy + dy*0.9
+				if fromx < tox {
+					textstyle.Origin.X = 1
+				} else {
+					textstyle.Origin.X = -1
+				}
+			}
+
 			textstyle.Rotation = angle
-			texts.Text(message.Text,
-				diagram.P((fromx+tox)*0.5, (fromy+toy)*0.5-textstyle.Size*0.6), textstyle)
+			texts.Text(message.Text, diagram.P(tx, ty-textstyle.Size*0.6), textstyle)
 		}
 	}
 }
