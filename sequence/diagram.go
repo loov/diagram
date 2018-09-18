@@ -43,7 +43,7 @@ func New() *Diagram {
 	const lineHeight = 16
 
 	dia.Theme.TimeScale = lineHeight * 2
-	dia.Theme.CaptionHeight = lineHeight * 3
+	dia.Theme.CaptionHeight = lineHeight * 2
 	dia.Theme.LaneWidth = 200
 	dia.Theme.LanePadding = lineHeight
 
