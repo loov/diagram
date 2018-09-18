@@ -98,7 +98,8 @@ type Message struct {
 	Caption diagram.Style
 	Line    diagram.Style
 
-	align int
+	failed bool
+	align  int
 }
 
 func Send(from, to Role, message string) *Message {
@@ -119,6 +120,7 @@ func (message *Message) At(at Time) *Message                { message.When = at;
 func (message *Message) Sleeping(sleep Time) *Message       { message.Sleep = sleep; return message }
 func (message *Message) Delayed(delay Time) *Message        { message.Delay = delay; return message }
 func (message *Message) Lined(style diagram.Style) *Message { message.Line = style; return message }
+func (message *Message) Failed() *Message                   { message.failed = true; return message }
 
 func (message *Message) StartAlign() *Message { message.align = -1; return message }
 func (message *Message) EndAlign() *Message   { message.align = 1; return message }
@@ -220,8 +222,16 @@ func (dia *Diagram) Draw(canvas diagram.Canvas) {
 	for _, message := range dia.Messages {
 		fromx := dia.Lane(message.From).Center
 		fromy := y0 + (message.Start()-dia.Start)*dia.Theme.TimeScale
+
 		tox := dia.Lane(message.To).Center
 		toy := y0 + (message.End()-dia.Start)*dia.Theme.TimeScale
+		if message.failed {
+			if fromx < tox {
+				tox -= dia.Theme.LaneWidth * 0.2
+			} else {
+				tox += dia.Theme.LaneWidth * 0.2
+			}
+		}
 
 		lineStyle := message.Line.Or(dia.Theme.Send)
 		sends.Poly(diagram.Ps(fromx, fromy, tox, toy), lineStyle)
@@ -231,10 +241,18 @@ func (dia *Diagram) Draw(canvas diagram.Canvas) {
 
 		var s = lineStyle.Size * 4
 		var sn, cs float64
-		sn, cs = math.Sincos(angle - math.Pi + math.Pi/8)
-		sends.Poly(diagram.Ps(tox, toy, tox+cs*s, toy+sn*s), lineStyle)
-		sn, cs = math.Sincos(angle - math.Pi - math.Pi/8)
-		sends.Poly(diagram.Ps(tox, toy, tox+cs*s, toy+sn*s), lineStyle)
+
+		if !message.failed {
+			sn, cs = math.Sincos(angle - math.Pi + math.Pi/8)
+			sends.Poly(diagram.Ps(tox, toy, tox+cs*s, toy+sn*s), lineStyle)
+			sn, cs = math.Sincos(angle - math.Pi - math.Pi/8)
+			sends.Poly(diagram.Ps(tox, toy, tox+cs*s, toy+sn*s), lineStyle)
+		} else {
+			sn, cs = math.Sincos(angle - math.Pi + math.Pi/4)
+			sends.Poly(diagram.Ps(tox-cs*s, toy-sn*s, tox+cs*s, toy+sn*s), lineStyle)
+			sn, cs = math.Sincos(angle - math.Pi - math.Pi/4)
+			sends.Poly(diagram.Ps(tox-cs*s, toy-sn*s, tox+cs*s, toy+sn*s), lineStyle)
+		}
 
 		if message.Text != "" {
 			textstyle := message.Caption.Or(dia.Theme.Message)
