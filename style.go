@@ -17,6 +17,7 @@ type Style struct {
 	Origin   Point // {-1..1, -1..1}
 
 	// SVG
+	Hint  string
 	Class string
 }
 

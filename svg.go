@@ -75,16 +75,17 @@ func (svg *svgContext) Layer(index int) Canvas {
 	})
 	if i < len(svg.layers) && svg.layers[i].index == index {
 		return svg.layers[i]
-	} else {
-		layer := &svgContext{}
-		layer.index = index
-		layer.bounds = svg.bounds.Zero()
-
-		svg.layers = append(svg.layers, layer)
-		copy(svg.layers[i+1:], svg.layers[i:])
-		svg.layers[i] = layer
-		return layer
 	}
+
+	layer := &svgContext{}
+	layer.index = index
+	layer.bounds = svg.bounds.Zero()
+
+	svg.layers = append(svg.layers, layer)
+	copy(svg.layers[i+1:], svg.layers[i:])
+	svg.layers[i] = layer
+	return layer
+
 }
 
 func (svg *svgContext) Text(text string, at Point, style *Style) {
@@ -185,13 +186,26 @@ func (svg *SVG) WriteTo(dst io.Writer) (n int64, err error) {
 			for _, p := range el.points {
 				w.Printf(`%.2f,%.2f `, p.X, p.Y)
 			}
-			w.Print(`' />`)
+			if el.style.Hint != "" {
+				w.Print(`' >`)
+				w.Printf(`<title>'`)
+				xml.EscapeText(w, []byte(el.style.Hint))
+				w.Printf(`</title>`)
+				w.Print(`'</polyline>`)
+			} else {
+				w.Print(`' />`)
+			}
 		}
 		if el.text != "" {
 			w.Printf(`<g transform='translate(%.2f,%2.f)'>`, el.origin.X, el.origin.Y)
 			w.Printf(`<text `)
 			w.writeTextStyle(&el.style)
 			w.Printf(`>`)
+			if el.style.Hint != "" {
+				w.Printf(`<title>'`)
+				xml.EscapeText(w, []byte(el.style.Hint))
+				w.Printf(`</title>`)
+			}
 			xml.EscapeText(w, []byte(el.text))
 			w.Print(`</text></g>`)
 		}
