@@ -4,8 +4,8 @@ import (
 	"io/ioutil"
 	"log"
 
-	"github.com/loov/diagram"
-	"github.com/loov/diagram/sequence"
+	"loov.dev/diagram"
+	"loov.dev/diagram/sequence"
 )
 
 func main() {

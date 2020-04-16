@@ -14,7 +14,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/loov/diagram"
+	"loov.dev/diagram"
 )
 
 func main() {

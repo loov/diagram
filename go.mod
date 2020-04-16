@@ -1,3 +1,3 @@
-module github.com/loov/diagram
+module loov.dev/diagram
 
 go 1.13

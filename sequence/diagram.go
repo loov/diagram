@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/loov/diagram"
+	"loov.dev/diagram"
 )
 
 type Diagram struct {
