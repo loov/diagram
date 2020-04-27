@@ -1,0 +1,77 @@
+{"Time":"2020-04-27T18:39:05.4914199+03:00","Action":"run","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha","Output":"=== RUN   TestAlpha\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha","Output":"=== PAUSE TestAlpha\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"pause","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"run","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta","Output":"=== RUN   TestBeta\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta","Output":"=== PAUSE TestBeta\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"pause","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"cont","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha","Output":"=== CONT  TestAlpha\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"run","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/A"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/A","Output":"=== RUN   TestAlpha/A\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/A","Output":"=== PAUSE TestAlpha/A\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"pause","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/A"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"run","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B","Output":"=== RUN   TestAlpha/B\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B","Output":"=== PAUSE TestAlpha/B\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"pause","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"run","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/C"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/C","Output":"=== RUN   TestAlpha/C\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/C","Output":"=== PAUSE TestAlpha/C\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"pause","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/C"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"cont","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/A"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/A","Output":"=== CONT  TestAlpha/A\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"cont","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta","Output":"=== CONT  TestBeta\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"run","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/A"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/A","Output":"=== RUN   TestBeta/A\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/A","Output":"=== PAUSE TestBeta/A\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"pause","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/A"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"run","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/B"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/B","Output":"=== RUN   TestBeta/B\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/B","Output":"=== PAUSE TestBeta/B\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"pause","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/B"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"run","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/C"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/C","Output":"=== RUN   TestBeta/C\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/C","Output":"=== PAUSE TestBeta/C\n"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"pause","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/C"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"cont","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/C"}
+{"Time":"2020-04-27T18:39:05.4924293+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/C","Output":"=== CONT  TestAlpha/C\n"}
+{"Time":"2020-04-27T18:39:07.4919833+03:00","Action":"cont","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B"}
+{"Time":"2020-04-27T18:39:07.4919833+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B","Output":"=== CONT  TestAlpha/B\n"}
+{"Time":"2020-04-27T18:39:08.4993442+03:00","Action":"cont","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/A"}
+{"Time":"2020-04-27T18:39:08.4993442+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/A","Output":"=== CONT  TestBeta/A\n"}
+{"Time":"2020-04-27T18:39:08.4993442+03:00","Action":"run","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B/X"}
+{"Time":"2020-04-27T18:39:08.4993442+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B/X","Output":"=== RUN   TestAlpha/B/X\n"}
+{"Time":"2020-04-27T18:39:08.4993442+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B/X","Output":"=== PAUSE TestAlpha/B/X\n"}
+{"Time":"2020-04-27T18:39:08.4993442+03:00","Action":"pause","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B/X"}
+{"Time":"2020-04-27T18:39:09.4996641+03:00","Action":"cont","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/C"}
+{"Time":"2020-04-27T18:39:09.4996641+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/C","Output":"=== CONT  TestBeta/C\n"}
+{"Time":"2020-04-27T18:39:09.4996641+03:00","Action":"cont","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/B"}
+{"Time":"2020-04-27T18:39:09.4996641+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/B","Output":"=== CONT  TestBeta/B\n"}
+{"Time":"2020-04-27T18:39:11.500274+03:00","Action":"cont","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B/X"}
+{"Time":"2020-04-27T18:39:11.500274+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B/X","Output":"=== CONT  TestAlpha/B/X\n"}
+{"Time":"2020-04-27T18:39:11.500274+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha","Output":"--- PASS: TestAlpha (0.00s)\n"}
+{"Time":"2020-04-27T18:39:11.500274+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/A","Output":"    --- PASS: TestAlpha/A (2.00s)\n"}
+{"Time":"2020-04-27T18:39:11.500274+03:00","Action":"pass","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/A","Elapsed":2}
+{"Time":"2020-04-27T18:39:11.500274+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/C","Output":"    --- PASS: TestAlpha/C (3.01s)\n"}
+{"Time":"2020-04-27T18:39:11.500274+03:00","Action":"pass","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/C","Elapsed":3.01}
+{"Time":"2020-04-27T18:39:11.500274+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B","Output":"    --- PASS: TestAlpha/B (2.01s)\n"}
+{"Time":"2020-04-27T18:39:11.500274+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B/X","Output":"        --- PASS: TestAlpha/B/X (0.00s)\n"}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B/X","Output":"    TestBeta/C: output_test.go:41: failure\n"}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"pass","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B/X","Elapsed":0}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"pass","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha/B","Elapsed":2.01}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"pass","Package":"loov.dev/diagram/cmd/testplot","Test":"TestAlpha","Elapsed":0}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta","Output":"--- FAIL: TestBeta (0.00s)\n"}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/A","Output":"    --- PASS: TestBeta/A (1.00s)\n"}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"pass","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/A","Elapsed":1}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/B","Output":"    --- PASS: TestBeta/B (2.00s)\n"}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"pass","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/B","Elapsed":2}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/C","Output":"    --- FAIL: TestBeta/C (3.01s)\n"}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"fail","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta/C","Elapsed":3.01}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"fail","Package":"loov.dev/diagram/cmd/testplot","Test":"TestBeta","Elapsed":0}
+{"Time":"2020-04-27T18:39:12.5054979+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Output":"FAIL\n"}
+{"Time":"2020-04-27T18:39:12.5135138+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Output":"exit status 1\n"}
+{"Time":"2020-04-27T18:39:12.5135138+03:00","Action":"output","Package":"loov.dev/diagram/cmd/testplot","Output":"FAIL\tloov.dev/diagram/cmd/testplot\t7.207s\n"}
+{"Time":"2020-04-27T18:39:12.5135138+03:00","Action":"fail","Package":"loov.dev/diagram/cmd/testplot","Elapsed":7.207}

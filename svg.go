@@ -44,6 +44,11 @@ func NewSVG(width, height Length) *SVG {
 	return svg
 }
 
+func (svg *SVG) SetSize(width, height Length) {
+	svg.bounds.Max.X = width
+	svg.bounds.Max.Y = height
+}
+
 func (svg *SVG) Bytes() []byte {
 	var buffer bytes.Buffer
 	svg.WriteTo(&buffer)
@@ -127,7 +132,7 @@ func (svg *SVG) WriteTo(dst io.Writer) (n int64, err error) {
 		w.Print(`<style>/* <![CDATA[ */ %v /* ]]> */ </style>`, svg.Style)
 	}
 
-	w.Print(`<g transform='translate(0.5, 0.5)'>`)
+	w.Print(`<g transform='translate(0, 0)'>`)
 	defer w.Print(`</g>`)
 
 	var writeLayer func(svg *svgContext)
@@ -202,7 +207,7 @@ func (svg *SVG) WriteTo(dst io.Writer) (n int64, err error) {
 			w.writeTextStyle(&el.style)
 			w.Printf(`>`)
 			if el.style.Hint != "" {
-				w.Printf(`<title>'`)
+				w.Printf(`<title>`)
 				xml.EscapeText(w, []byte(el.style.Hint))
 				w.Printf(`</title>`)
 			}
