@@ -25,6 +25,7 @@ type Plot struct {
 	span Span
 
 	SVG   *diagram.SVG
+	Grid  diagram.Canvas
 	Spans diagram.Canvas
 	Assoc diagram.Canvas
 	Text  diagram.Canvas
@@ -43,26 +44,70 @@ func RenderSVG(ts *TestSuite) []byte {
 		},
 
 		maxX: 0,
-		y:    0,
+		y:    20,
 		span: ts.Span,
 
-		Spans: canvas.Layer(0),
-		Assoc: canvas.Layer(1),
-		Text:  canvas.Layer(2),
+		Grid:  canvas.Layer(0),
+		Spans: canvas.Layer(1),
+		Assoc: canvas.Layer(2),
+		Text:  canvas.Layer(3),
 	}
 
 	for _, sub := range ts.Sub {
 		plot.addPackage(sub)
 	}
 
-	totalWidth := ts.Duration().Seconds() * plot.PxPerSecond
-	canvas.SetSize(totalWidth+200, plot.y)
+	plot.addGrid()
+	canvas.SetSize(plot.tox(ts.Finish)+150, plot.y)
 
 	return canvas.Bytes()
 }
 
 func (p *Plot) tox(t time.Time) float64 {
 	return 50 + t.Sub(p.span.Start).Seconds()*p.PxPerSecond
+}
+
+func (p *Plot) addGrid() {
+	duration := p.span.Duration()
+
+	minorTick := 10 * time.Second
+	k := 1
+	for tick := 0 * time.Second; tick < duration; tick += minorTick {
+		k++
+		if k%2 == 0 {
+			continue
+		}
+
+		t := p.span.Start.Add(tick)
+		p.Grid.Rect(diagram.R(
+			p.tox(t), 0,
+			p.tox(t.Add(minorTick)), p.y,
+		), &diagram.Style{
+			Fill: color.Gray{0xF8},
+		})
+	}
+
+	majorTick := time.Minute
+	for tick := 0 * time.Second; tick < duration; tick += majorTick {
+		t := p.span.Start.Add(tick)
+
+		p.Grid.Poly([]diagram.Point{
+			{X: p.tox(t), Y: 0},
+			{X: p.tox(t), Y: p.y},
+		}, &diagram.Style{
+			Stroke: color.Gray{0x80},
+			Size:   1,
+		})
+
+		p.Text.Text(tick.String(), diagram.Point{
+			X: p.tox(t),
+			Y: 20,
+		}, &diagram.Style{
+			Stroke: color.Gray{0x40},
+			Size:   12,
+			Origin: diagram.Point{X: -1, Y: 0},
+		})
+	}
 }
 
 func (p *Plot) addPackage(t *Task) {

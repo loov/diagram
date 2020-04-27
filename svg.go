@@ -132,7 +132,7 @@ func (svg *SVG) WriteTo(dst io.Writer) (n int64, err error) {
 		w.Print(`<style>/* <![CDATA[ */ %v /* ]]> */ </style>`, svg.Style)
 	}
 
-	w.Print(`<g transform='translate(0, 0)'>`)
+	w.Print(`<g transform='translate(0.5, 0.5)'>`)
 	defer w.Print(`</g>`)
 
 	var writeLayer func(svg *svgContext)
@@ -193,7 +193,7 @@ func (svg *SVG) WriteTo(dst io.Writer) (n int64, err error) {
 			}
 			if el.style.Hint != "" {
 				w.Print(`' >`)
-				w.Printf(`<title>'`)
+				w.Printf(`<title>`)
 				xml.EscapeText(w, []byte(el.style.Hint))
 				w.Printf(`</title>`)
 				w.Print(`'</polyline>`)
