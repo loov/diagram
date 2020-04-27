@@ -60,6 +60,7 @@ func RenderSVG(ts *TestSuite) []byte {
 
 	plot.addGrid()
 	width, height := plot.tox(ts.Finish)+150, plot.y
+	canvas.Style = ""
 	canvas.SetSize(width, height)
 
 	canvas.Layer(-1).Rect(diagram.R(
