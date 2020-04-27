@@ -33,7 +33,6 @@ type Plot struct {
 
 func RenderSVG(ts *TestSuite) []byte {
 	canvas := diagram.NewSVG(0, 0)
-	canvas.Style = ""
 
 	plot := &Plot{
 		Config: Config{
@@ -60,7 +59,15 @@ func RenderSVG(ts *TestSuite) []byte {
 	}
 
 	plot.addGrid()
-	canvas.SetSize(plot.tox(ts.Finish)+150, plot.y)
+	width, height := plot.tox(ts.Finish)+150, plot.y
+	canvas.SetSize(width, height)
+
+	canvas.Layer(-1).Rect(diagram.R(
+		0, 0,
+		width, height,
+	), &diagram.Style{
+		Fill: color.Gray{0xFF},
+	})
 
 	return canvas.Bytes()
 }

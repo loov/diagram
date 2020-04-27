@@ -27,7 +27,19 @@ func main() {
 
 	testsuite := NewTestSuite()
 
-	dec := NewEventDecoder(bufio.NewReader(os.Stdin))
+	var in io.Reader
+	if fname := flag.Arg(0); fname != "" {
+		var err error
+		in, err = os.Open(fname)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "failed to open %q: %w\n", fname, err)
+			os.Exit(1)
+		}
+	} else {
+		in = os.Stdin
+	}
+
+	dec := NewEventDecoder(bufio.NewReader(in))
 	for {
 		event, err := dec.Next()
 		if err != nil {
