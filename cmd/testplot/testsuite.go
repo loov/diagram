@@ -3,6 +3,7 @@ package main
 import (
 	"sort"
 	"strings"
+	"time"
 )
 
 type TestSuite struct {
@@ -43,12 +44,18 @@ type Events []Event
 func (evs *Events) Add(ev Event) { *evs = append(*evs, ev) }
 
 func (task *Task) Add(path []string, ev Event) {
-	task.Extend(ev.Time)
 	if len(path) == 0 {
+		// When there are multiple sub-tests the pass/fail message end up same time.
+		if len(task.Events) > 0 && (ev.Action == ActionPass || ev.Action == ActionFail) {
+			last := &task.Events[len(task.Events)-1]
+			ev.Time = last.Time.Add(time.Duration(ev.Elapsed * float64(time.Second)))
+		}
+		task.Extend(ev.Time)
 		task.Events.Add(ev)
 		return
 	}
 
+	task.Extend(ev.Time)
 	sub := task.EnsureSub(path[0])
 	sub.Add(path[1:], ev)
 }
