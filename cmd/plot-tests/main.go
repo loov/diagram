@@ -8,22 +8,27 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"time"
 )
 
 func main() {
-	//packageHeight := flag.Float64("package-height", 12, "height of a package line")
-	//testHeight := flag.Float64("test-height", 3, "height of a test line")
-	//collapseHeight := flag.Float64("collapse-height", 1, "height of a test line")
-	//pxPerSecond := flag.Float64("pixels-per-second", 1, "how many pixels a single second is")
-	// collapsePkgDuration := flag.Duration("ignore-package", 0*time.Second, "ignore packages with shorter duration")
-	// collapseTestDuration := flag.Duration("ignore-test", 0*time.Second, "ignore tests with shorter duration")
+	config := Config{
+		PackageHeight: 20,
+		TestHeight:    10,
+		PxPerSecond:   2,
+
+		IgnorePackage: 2 * time.Second,
+		IgnoreTest:    2 * time.Second,
+	}
+
+	flag.Float64Var(&config.PackageHeight, "plot.package-height", config.PackageHeight, "height of a package span")
+	flag.Float64Var(&config.TestHeight, "plot.test-height", config.TestHeight, "height of a test span")
+	flag.Float64Var(&config.PxPerSecond, "plot.px-per-second", config.PxPerSecond, "how many pixels per second")
+
+	flag.DurationVar(&config.IgnorePackage, "ignore-package", config.IgnorePackage, "ignore packages with shorter duration")
+	flag.DurationVar(&config.IgnoreTest, "ignore-test", config.IgnoreTest, "ignore tests with shorter duration")
 
 	flag.Parse()
-
-	//PackageHeight := *packageHeight
-	//TestHeight := *testHeight
-	//CollapseHeight := *collapseHeight
-	//PxPerSecond := *pxPerSecond
 
 	testsuite := NewTestSuite()
 
@@ -54,7 +59,7 @@ func main() {
 
 	testsuite.Sort()
 
-	rendered := RenderSVG(testsuite)
+	rendered := RenderSVG(config, testsuite)
 
 	os.Stdout.Write(rendered)
 }

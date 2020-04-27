@@ -31,18 +31,11 @@ type Plot struct {
 	Text  diagram.Canvas
 }
 
-func RenderSVG(ts *TestSuite) []byte {
+func RenderSVG(config Config, ts *TestSuite) []byte {
 	canvas := diagram.NewSVG(0, 0)
 
 	plot := &Plot{
-		Config: Config{
-			PackageHeight: 20,
-			TestHeight:    10,
-			PxPerSecond:   2,
-
-			IgnorePackage: 2 * time.Second,
-			IgnoreTest:    2 * time.Second,
-		},
+		Config: config,
 
 		maxX: 0,
 		y:    20,
