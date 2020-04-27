@@ -33,11 +33,13 @@ type Plot struct {
 
 func RenderSVG(ts *TestSuite) []byte {
 	canvas := diagram.NewSVG(0, 0)
+	canvas.Style = ""
+
 	plot := &Plot{
 		Config: Config{
-			PackageHeight: 12,
-			TestHeight:    3,
-			PxPerSecond:   1,
+			PackageHeight: 20,
+			TestHeight:    10,
+			PxPerSecond:   2,
 
 			IgnorePackage: 2 * time.Second,
 			IgnoreTest:    2 * time.Second,
@@ -170,6 +172,15 @@ func (p *Plot) addTest(level int, parent diagram.Point, t *Task) {
 		Hint: hint,
 	})
 	p.drawEvents(level, r.Min.Y, r.Max.Y, t.Events, hint)
+
+	p.Text.Text(t.Name, diagram.Point{
+		X: r.Min.X + 2.0,
+		Y: r.Max.Y - 2.0,
+	}, &diagram.Style{
+		Stroke: color.Black,
+		Size:   r.Size().Y,
+		Origin: diagram.Point{X: -1, Y: 1},
+	})
 
 	p.Assoc.Poly([]diagram.Point{
 		{X: parent.X, Y: parent.Y},
