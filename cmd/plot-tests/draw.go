@@ -114,7 +114,7 @@ func (p *Plot) addGrid() {
 }
 
 func (p *Plot) addPackage(t *Task) {
-	if t.Duration() < p.IgnorePackage {
+	if t.Duration() < p.IgnorePackage && t.HasFinished() {
 		return
 	}
 
@@ -155,7 +155,7 @@ func (p *Plot) addPackage(t *Task) {
 }
 
 func (p *Plot) addTest(level int, parent diagram.Point, t *Task) {
-	if t.Duration() < p.IgnoreTest {
+	if t.Duration() < p.IgnoreTest && t.HasFinished() {
 		return
 	}
 
@@ -172,7 +172,19 @@ func (p *Plot) addTest(level int, parent diagram.Point, t *Task) {
 		Fill: color.Gray{0xC0},
 		Hint: hint,
 	})
+
 	p.drawEvents(level, r.Min.Y, r.Max.Y, t.Events, hint)
+
+	if !t.HasFinished() {
+		err := r
+		err.Min.X = r.Max.X
+		err.Min.Y += p.TestHeight / 3
+		err.Max.X = p.tox(p.span.Finish)
+		err.Max.Y -= p.TestHeight / 3
+		p.Spans.Rect(err, &diagram.Style{
+			Fill: color.RGBA{R: 0xFF, G: 0xA0, B: 0xA0, A: 0xFF},
+		})
+	}
 
 	p.Text.Text(t.Name, diagram.Point{
 		X: r.Min.X + 2.0,

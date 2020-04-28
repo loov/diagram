@@ -60,6 +60,23 @@ func (task *Task) Add(path []string, ev Event) {
 	sub.Add(path[1:], ev)
 }
 
+func (task *Task) HasFinished() bool {
+	if len(task.Events) > 0 {
+		lastAct := task.Events[len(task.Events)-1]
+		if lastAct.Action != ActionPass && lastAct.Action != ActionFail && lastAct.Action != ActionSkip {
+			return false
+		}
+	}
+
+	for _, sub := range task.Sub {
+		if !sub.HasFinished() {
+			return false
+		}
+	}
+
+	return true
+}
+
 func (task *Task) EnsureSub(name string) *Task {
 	if task.ByName == nil {
 		task.ByName = map[string]*Task{}

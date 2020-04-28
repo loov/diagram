@@ -22,6 +22,7 @@ const (
 	ActionCont   = "cont"
 	ActionPass   = "pass"
 	ActionFail   = "fail"
+	ActionSkip   = "skip"
 )
 
 type EventDecoder struct {
